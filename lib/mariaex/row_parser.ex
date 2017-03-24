@@ -77,6 +77,7 @@ defmodule Mariaex.RowParser do
   defp type_to_atom({:float, :field_type_double}, _),        do: :float64
   defp type_to_atom({:bit, :field_type_bit}, _),             do: :bit
   defp type_to_atom({:null, :field_type_null}, _),           do: nil
+  defp type_to_atom({:json, :field_type_json}, _),           do: :string
 
   defp decode_bin_rows(<<rest::bits>>, [_ | fields], nullint, acc) when (nullint &&& 1) === 1 do
     decode_bin_rows(rest, fields, nullint >>> 1, [nil | acc])
